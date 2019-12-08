@@ -13,7 +13,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Scripter {
-    //TODO NIE MOZNA W JEDNYM SKRYPCIE MODYFIKOWAC WIECEJ JAK RAZ TEGO SAMEGO PLIKU
 
     static JarFile inputFile = null;
     static File outputFile = null;
@@ -189,35 +188,33 @@ public class Scripter {
             }
             case "set-method-body":
             {
-                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
-//                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
-//                ctClass.defrost();
-//                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
-//                StringBuilder newMethodBody= new StringBuilder();
-//                try {
-//                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
-//                    Scanner myReader = new Scanner(newMethodBodyFile);
-//                    while (myReader.hasNextLine()) {
-//                        newMethodBody.append(myReader.nextLine());
-//                    }
-//                    myReader.close();
-//                } catch (FileNotFoundException e) {
-//                    System.out.println("An error occurred.");
-//                    e.printStackTrace();
-//                }
-//                ctMethod.setBody(newMethodBody.toString());
-//                ctClass.writeFile();
-//                byte[] bytes = ctClass.toBytecode();
-//                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-//                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-//                jarOutputStream.putNextEntry(classEntry);
-//                jarOutputStream.write(bytes);
-//                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                StringBuilder newMethodBody= new StringBuilder();
+                try {
+                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
+                    Scanner myReader = new Scanner(newMethodBodyFile);
+                    while (myReader.hasNextLine()) {
+                        newMethodBody.append(myReader.nextLine());
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                ctMethod.setBody(newMethodBody.toString());
+                ctClass.writeFile();
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-before-method":
             {
-                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
@@ -245,7 +242,6 @@ public class Scripter {
             }
             case "add-after-method":
             {
-                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
@@ -273,10 +269,34 @@ public class Scripter {
             }
             case "add-field":
             {
+                CtClass ctClass = ClassPool.getDefault().get(wordsInScriptFile[1]);
+                StringBuilder newFieldString = new StringBuilder();
+                for(int i=2;i<wordsInScriptFile.length;i++)
+                {
+                    newFieldString.append(wordsInScriptFile[i]).append(" ");
+                }
+                CtField ctField = CtField.make(newFieldString.toString(),ctClass);
+                ctClass.addField(ctField);
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "remove-field":
             {
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                CtField ctField = ctClass.getField(wordsInScriptFile[2]);
+                ctClass.removeField(ctField);
+                ctClass.writeFile();
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-ctor":
@@ -299,7 +319,6 @@ public class Scripter {
         while ((entry = jarInputStream.getNextJarEntry())!=null) {
             if(!elementsToIgnoreInNewJarFile.contains(entry.getName()))
             {
-                //TODO dodawanie pliku .gitignore
                 if(entry.getRealName().equals(".gitignore"))
                 {
                     System.out.println("znaleziono plik .gitignore");

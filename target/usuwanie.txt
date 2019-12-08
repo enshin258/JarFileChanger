@@ -1,4 +1,5 @@
 remove-package com.diamond.iain.javagame.entities.MOJPAKIET
 remove-class com.diamond.iain.javagame.entities.MOJAKLASA
 remove-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
-remove-method com.diamond.iain.javagame.entities.Aliens$1 mojaMetoda
+remove-method com.diamond.iain.javagame.entities.Aliens MOJAMETODA
+remove-field com.diamond.iain.javagame.entities.Meteor score

@@ -1,0 +1,5 @@
+{
+      super.reset();
+      this.speed = 1;
+System.out.println("TU ZMIENIONO METODE");
+}

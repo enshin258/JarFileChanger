@@ -2,6 +2,7 @@ add-package com.diamond.iain.javagame.entities.MOJPAKIET
 add-class com.diamond.iain.javagame.entities.MOJAKLASA
 add-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
 add-method com.diamond.iain.javagame.entities.Aliens public String MOJAMETODA(String str) { return str+"test"; }
-set-method-body com.diamond.iain.javagame.entities.Aliens addEnemyMissile addEnemyMissile_body.txt
-add-before-method com.diamond.iain.javagame.entities.Destroyer render add_before.txt
+set-method-body com.diamond.iain.javagame.entities.Destroyer reset new_body.txt
+add-before-method com.diamond.iain.javagame.entities.Invader render add_before.txt
 add-after-method com.diamond.iain.javagame.entities.Martian render add_after.txt
+add-field com.diamond.iain.javagame.entities.Mercurian public int MOJEPOLE = 3;
