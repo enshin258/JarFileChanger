@@ -1,7 +1,4 @@
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.NotFoundException;
+import javassist.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Scripter {
+    //TODO NIE MOZNA W JEDNYM SKRYPCIE MODYFIKOWAC WIECEJ JAK RAZ TEGO SAMEGO PLIKU
 
     static JarFile inputFile = null;
     static File outputFile = null;
@@ -28,6 +26,7 @@ public class Scripter {
 
     static File scriptFile = null;
     static LinkedList<String> elementsToIgnoreInNewJarFile = new LinkedList<>();
+
 
     public static void loadJarFile(String[] args) throws UnknownOperationException, NoOutputParameterException, NotFoundException, CannotCompileException {
         arguments=args;
@@ -81,6 +80,7 @@ public class Scripter {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] wordsInScriptFileInScriptFile = data.split(" ");
+                System.out.println("***Actually executed command***");
                 System.out.println(data);
                 executeCommand(wordsInScriptFileInScriptFile);
             }
@@ -122,7 +122,6 @@ public class Scripter {
             }
             case "add-class":
             {
-                //dodaje klase
                 String tempClassName = wordsInScriptFile[1].replaceAll("\\.","/");
                 CtClass ctClass = classPool.makeClass(tempClassName);
                 byte[] bytes = ctClass.toBytecode();
@@ -140,7 +139,6 @@ public class Scripter {
             }
             case "add-interface":
             {
-                //dodaje klase
                 String tempInterfaceName = wordsInScriptFile[1].replaceAll("\\.","/");
                 CtClass ctClass = classPool.makeInterface(tempInterfaceName);
                 byte[] bytes = ctClass.toBytecode();
@@ -158,23 +156,119 @@ public class Scripter {
             }
             case "add-method":
             {
+                CtClass ctClass = ClassPool.getDefault().get(wordsInScriptFile[1]);
+                StringBuilder newMethodString = new StringBuilder();
+                for(int i=2;i<wordsInScriptFile.length;i++)
+                {
+                    newMethodString.append(wordsInScriptFile[i]).append(" ");
+                }
+                CtMethod ctMethod = CtNewMethod.make(newMethodString.toString(),ctClass);
+                ctClass.addMethod(ctMethod);
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
 
                 break;
             }
             case "remove-method":
             {
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                ctClass.removeMethod(ctMethod);
+                ctClass.writeFile();
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "set-method-body":
             {
+                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
+//                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+//                ctClass.defrost();
+//                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+//                StringBuilder newMethodBody= new StringBuilder();
+//                try {
+//                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
+//                    Scanner myReader = new Scanner(newMethodBodyFile);
+//                    while (myReader.hasNextLine()) {
+//                        newMethodBody.append(myReader.nextLine());
+//                    }
+//                    myReader.close();
+//                } catch (FileNotFoundException e) {
+//                    System.out.println("An error occurred.");
+//                    e.printStackTrace();
+//                }
+//                ctMethod.setBody(newMethodBody.toString());
+//                ctClass.writeFile();
+//                byte[] bytes = ctClass.toBytecode();
+//                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+//                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+//                jarOutputStream.putNextEntry(classEntry);
+//                jarOutputStream.write(bytes);
+//                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-before-method":
             {
+                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                StringBuilder newMethodBody= new StringBuilder();
+                try {
+                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
+                    Scanner myReader = new Scanner(newMethodBodyFile);
+                    while (myReader.hasNextLine()) {
+                        newMethodBody.append(myReader.nextLine());
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                ctMethod.insertBefore(newMethodBody.toString());
+                ctClass.writeFile();
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-after-method":
             {
+                //TODO naprawic bo jak sie tworzy metode ktora w srodku powoluja jakas klase to wywala blad
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                StringBuilder newMethodBody= new StringBuilder();
+                try {
+                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
+                    Scanner myReader = new Scanner(newMethodBodyFile);
+                    while (myReader.hasNextLine()) {
+                        newMethodBody.append(myReader.nextLine());
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                ctMethod.insertAfter(newMethodBody.toString());
+                ctClass.writeFile();
+                byte[] bytes = ctClass.toBytecode();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
+                jarOutputStream.putNextEntry(classEntry);
+                jarOutputStream.write(bytes);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-field":
@@ -200,28 +294,20 @@ public class Scripter {
         }
     }
 
-//    public static void addRestOfJar() throws IOException {
-//        JarEntry entry = null;
-//        while ((entry = jarInputStream.getNextJarEntry())!=null)
-//        {
-//            InputStream is = inputFile.getInputStream(entry);
-//            jarOutputStream.putNextEntry(new JarEntry(entry.getName()));
-//            byte[] buffer = new byte[4096];
-//            int bytesRead = 0;
-//            while ((bytesRead = is.read(buffer)) != -1) {
-//                jarOutputStream.write(buffer, 0, bytesRead);
-//            }
-//            is.close();
-//            jarOutputStream.flush();
-//            jarOutputStream.closeEntry();
-//        }
-//
-//    }
     public static void addRestOfJarExceptSomething() throws IOException {
         JarEntry entry = null;
         while ((entry = jarInputStream.getNextJarEntry())!=null) {
             if(!elementsToIgnoreInNewJarFile.contains(entry.getName()))
             {
+                //TODO dodawanie pliku .gitignore
+                if(entry.getRealName().equals(".gitignore"))
+                {
+                    System.out.println("znaleziono plik .gitignore");
+                }
+                if(entry.getName().equals(".gitignore"))
+                {
+                    System.out.println("znaleziono plik .gitignore");
+                }
                 InputStream is = inputFile.getInputStream(entry);
                 jarOutputStream.putNextEntry(new JarEntry(entry.getName()));
                 byte[] buffer = new byte[4096];

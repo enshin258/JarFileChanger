@@ -1,0 +1,4 @@
+{
+this.enemyMissiles.add(new com.diamond.iain.javagame.entities.InvaderMissile(this.manager, java.awt.Point(p.x, p.y)));
+System.out.println("TU ZMIENIONO METODE");
+}
