@@ -1,0 +1,3 @@
+add-package com.diamond.iain.javagame.entities.MOJPAKIET
+add-class com.diamond.iain.javagame.entities.MOJAKLASA
+add-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
