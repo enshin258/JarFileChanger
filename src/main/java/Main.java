@@ -6,7 +6,6 @@ public class Main {
         // --i plik.jar --list-ctors nazwa_klasy
         // --i plik.jar --script nazwa_skryptu --o jar wyjsciowy
         //TODO pomija plik .gitignore
-        //TODO nie mozna modyfikowac dwa razy tej samej klasy w jednym skrypcie
         try {
             switch (args.length)
             {

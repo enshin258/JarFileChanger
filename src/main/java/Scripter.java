@@ -1,10 +1,7 @@
 import javassist.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
@@ -24,7 +21,9 @@ public class Scripter {
     static ClassPool classPool = ClassPool.getDefault();
 
     static File scriptFile = null;
-    static LinkedList<String> elementsToIgnoreInNewJarFile = new LinkedList<>();
+    static Set<String> elementsToIgnoreInNewJarFile = new HashSet<>();
+    static Set<CtClass> modifiedClasses = new HashSet<>();
+
 
 
     public static void loadJarFile(String[] args) throws UnknownOperationException, NoOutputParameterException, NotFoundException, CannotCompileException {
@@ -83,6 +82,7 @@ public class Scripter {
                 System.out.println(data);
                 executeCommand(wordsInScriptFileInScriptFile);
             }
+            addModifiedClasses();
             addRestOfJarExceptSomething();
             myReader.close();
             jarOutputStream.close();
@@ -123,10 +123,8 @@ public class Scripter {
             {
                 String tempClassName = wordsInScriptFile[1].replaceAll("\\.","/");
                 CtClass ctClass = classPool.makeClass(tempClassName);
-                byte[] bytes = ctClass.toBytecode();
-                JarEntry classEntry = new JarEntry(ctClass.getName()+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                ctClass.defrost();
+                modifiedClasses.add(ctClass);
                 break;
             }
             case "remove-class":
@@ -140,10 +138,8 @@ public class Scripter {
             {
                 String tempInterfaceName = wordsInScriptFile[1].replaceAll("\\.","/");
                 CtClass ctClass = classPool.makeInterface(tempInterfaceName);
-                byte[] bytes = ctClass.toBytecode();
-                JarEntry classEntry = new JarEntry(ctClass.getName()+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                ctClass.defrost();
+                modifiedClasses.add(ctClass);
                 break;
             }
             case "remove-interface":
@@ -155,7 +151,8 @@ public class Scripter {
             }
             case "add-method":
             {
-                CtClass ctClass = ClassPool.getDefault().get(wordsInScriptFile[1]);
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
                 StringBuilder newMethodString = new StringBuilder();
                 for(int i=2;i<wordsInScriptFile.length;i++)
                 {
@@ -163,26 +160,20 @@ public class Scripter {
                 }
                 CtMethod ctMethod = CtNewMethod.make(newMethodString.toString(),ctClass);
                 ctClass.addMethod(ctMethod);
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
-
                 break;
             }
             case "remove-method":
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
                 CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
                 ctClass.removeMethod(ctMethod);
                 ctClass.writeFile();
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
@@ -205,11 +196,8 @@ public class Scripter {
                 }
                 ctMethod.setBody(newMethodBody.toString());
                 ctClass.writeFile();
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
@@ -232,11 +220,8 @@ public class Scripter {
                 }
                 ctMethod.insertBefore(newMethodBody.toString());
                 ctClass.writeFile();
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
@@ -259,17 +244,15 @@ public class Scripter {
                 }
                 ctMethod.insertAfter(newMethodBody.toString());
                 ctClass.writeFile();
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-field":
             {
-                CtClass ctClass = ClassPool.getDefault().get(wordsInScriptFile[1]);
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
                 StringBuilder newFieldString = new StringBuilder();
                 for(int i=2;i<wordsInScriptFile.length;i++)
                 {
@@ -277,34 +260,42 @@ public class Scripter {
                 }
                 CtField ctField = CtField.make(newFieldString.toString(),ctClass);
                 ctClass.addField(ctField);
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "remove-field":
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
                 CtField ctField = ctClass.getField(wordsInScriptFile[2]);
                 ctClass.removeField(ctField);
                 ctClass.writeFile();
-                byte[] bytes = ctClass.toBytecode();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
-                JarEntry classEntry = new JarEntry(tempJarEntryClassName+".class");
-                jarOutputStream.putNextEntry(classEntry);
-                jarOutputStream.write(bytes);
+                modifiedClasses.add(ctClass);
                 elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "add-ctor":
             {
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                StringBuilder newConstructorString = new StringBuilder();
+                for(int i=2;i<wordsInScriptFile.length;i++)
+                {
+                    newConstructorString.append(wordsInScriptFile[i]).append(" ");
+                }
+                CtConstructor ctConstructor = CtNewConstructor.make(newConstructorString.toString(),ctClass);
+                ctClass.addConstructor(ctConstructor);
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                modifiedClasses.add(ctClass);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "remove-ctor":
             {
+
                 break;
             }
             case "set-ctor-body":
@@ -313,6 +304,17 @@ public class Scripter {
             }
         }
     }
+
+    public static void addModifiedClasses() throws IOException, CannotCompileException {
+
+        for (CtClass ctClass:modifiedClasses) {
+            JarEntry jarEntry = new JarEntry(ctClass.getName() + ".class");
+            byte[] bytes = ctClass.toBytecode();
+            jarOutputStream.putNextEntry(jarEntry);
+            jarOutputStream.write(bytes);
+        }
+    }
+
 
     public static void addRestOfJarExceptSomething() throws IOException {
         JarEntry entry = null;
@@ -340,5 +342,4 @@ public class Scripter {
             }
         }
     }
-
 }
