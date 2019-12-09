@@ -125,6 +125,7 @@ public class Scripter {
                 CtClass ctClass = classPool.makeClass(tempClassName);
                 ctClass.defrost();
                 modifiedClasses.add(ctClass);
+                elementsToIgnoreInNewJarFile.add(tempClassName + ".class");
                 break;
             }
             case "remove-class":
@@ -140,6 +141,7 @@ public class Scripter {
                 CtClass ctClass = classPool.makeInterface(tempInterfaceName);
                 ctClass.defrost();
                 modifiedClasses.add(ctClass);
+                elementsToIgnoreInNewJarFile.add(tempInterfaceName + ".class");
                 break;
             }
             case "remove-interface":
@@ -308,7 +310,8 @@ public class Scripter {
     public static void addModifiedClasses() throws IOException, CannotCompileException {
 
         for (CtClass ctClass:modifiedClasses) {
-            JarEntry jarEntry = new JarEntry(ctClass.getName() + ".class");
+            String tempClassname = ctClass.getName().replaceAll("\\.","/");
+            JarEntry jarEntry = new JarEntry(tempClassname + ".class");
             byte[] bytes = ctClass.toBytecode();
             jarOutputStream.putNextEntry(jarEntry);
             jarOutputStream.write(bytes);
@@ -319,16 +322,7 @@ public class Scripter {
     public static void addRestOfJarExceptSomething() throws IOException {
         JarEntry entry = null;
         while ((entry = jarInputStream.getNextJarEntry())!=null) {
-            if(!elementsToIgnoreInNewJarFile.contains(entry.getName()))
-            {
-                if(entry.getRealName().equals(".gitignore"))
-                {
-                    System.out.println("znaleziono plik .gitignore");
-                }
-                if(entry.getName().equals(".gitignore"))
-                {
-                    System.out.println("znaleziono plik .gitignore");
-                }
+            if(!elementsToIgnoreInNewJarFile.contains(entry.getName())) {
                 InputStream is = inputFile.getInputStream(entry);
                 jarOutputStream.putNextEntry(new JarEntry(entry.getName()));
                 byte[] buffer = new byte[4096];
