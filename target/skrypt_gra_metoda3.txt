@@ -1,0 +1,35 @@
+{
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_K)
+{
+    this.kflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_O)
+{
+    this.oflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_C)
+{
+    this.cflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_H)
+{
+    this.hflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_A)
+{
+    this.aflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_M)
+{
+    this.Mflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_J)
+{
+    this.jflag=true;
+}
+if(e.getKeyCode() == java.awt.event.KeyEvent.VK_F)
+{
+    this.fflag=true;
+}
+
+}

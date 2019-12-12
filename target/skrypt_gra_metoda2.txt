@@ -1,0 +1,60 @@
+{
+if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT) {
+this.player.setLeft(true);
+}
+
+if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
+this.player.setRight(true);
+}
+if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+this.cheatCode+=" ";
+if(this.cheatCode.contains("kocham jfk"))
+{
+this.player.cheatShot();
+}
+else
+{
+this.player.firePressed(true);
+}
+}
+
+if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_S) {
+this.aliens.restartGame(true);
+}
+
+if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+System.exit(0);
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_K)
+{
+    this.cheatCode+="k";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_O)
+{
+    this.cheatCode+="o";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_C)
+{
+    this.cheatCode+="c";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_H)
+{
+    this.cheatCode+="h";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_A)
+{
+    this.cheatCode+="a";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_M)
+{
+    this.cheatCode+="m";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_J)
+{
+    this.cheatCode+="j";
+}
+if($1.getKeyCode() == java.awt.event.KeyEvent.VK_F)
+{
+    this.cheatCode+="f";
+}
+}

@@ -297,11 +297,46 @@ public class Scripter {
             }
             case "remove-ctor":
             {
-
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                CtConstructor ctConstructor = ctClass.getConstructor(wordsInScriptFile[2]);
+                ctClass.removeConstructor(ctConstructor);
+                ctClass.writeFile();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                modifiedClasses.add(ctClass);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
             case "set-ctor-body":
             {
+                CtClass ctClass = classPool.get(wordsInScriptFile[1]);
+                ctClass.defrost();
+                CtConstructor ctConstructor =null;
+                for (CtConstructor c:ctClass.getConstructors()) {
+                    System.out.println(c.getLongName());
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctConstructor = c;
+                        break;
+                    }
+                }
+                StringBuilder newConstructorBody= new StringBuilder();
+                try {
+                    File newMethodBodyFile = new File(wordsInScriptFile[3]);
+                    Scanner myReader = new Scanner(newMethodBodyFile);
+                    while (myReader.hasNextLine()) {
+                        newConstructorBody.append(myReader.nextLine());
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                ctConstructor.setBody(newConstructorBody.toString());
+                ctClass.writeFile();
+                String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
+                modifiedClasses.add(ctClass);
+                elementsToIgnoreInNewJarFile.add(tempJarEntryClassName+".class");
                 break;
             }
         }

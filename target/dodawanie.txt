@@ -1,5 +1,5 @@
-add-package com.diamond.iain.javagame.entities.MOJPAKIET
 add-class com.diamond.iain.javagame.entities.MOJAKLASA
+add-package com.diamond.iain.javagame.entities.MOJPAKIET
 add-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
 add-method com.diamond.iain.javagame.entities.Aliens public String MOJAMETODA(String str) { return str+"test"; }
 set-method-body com.diamond.iain.javagame.entities.Destroyer reset new_body.txt
