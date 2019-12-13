@@ -6,8 +6,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public class Scripter {
 
@@ -97,19 +95,8 @@ public class Scripter {
             case "add-package":
             {
                 String tempDirectoryPath = wordsInScriptFile[1].replaceAll("\\.","/");
-                String tempDirectoryName = tempDirectoryPath.substring(tempDirectoryPath.lastIndexOf('/') + 1).trim();
-                tempDirectoryName +="/";
-                tempDirectoryPath = tempDirectoryPath.substring(0,tempDirectoryPath.lastIndexOf("/")+1);
-                JarEntry jarEntry = null;
-                while((jarEntry=jarInputStream.getNextJarEntry())!=null)
-                {
-                    if(jarEntry.isDirectory() && jarEntry.getName().equals(tempDirectoryPath))
-                    {
-                        JarEntry jarNewDirectory = new JarEntry(jarEntry.getName()+tempDirectoryName);
-                        jarOutputStream.putNextEntry(jarNewDirectory);
-                        break;
-                    }
-                }
+                JarEntry jarNewDirectory = new JarEntry(tempDirectoryPath  + "/");
+                jarOutputStream.putNextEntry(jarNewDirectory);
                 break;
             }
             case "remove-package":
@@ -171,7 +158,14 @@ public class Scripter {
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
-                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                CtMethod ctMethod = null;
+                for (CtMethod c:ctClass.getMethods()) {
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctMethod = c;
+                        break;
+                    }
+                }
                 ctClass.removeMethod(ctMethod);
                 ctClass.writeFile();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
@@ -183,7 +177,14 @@ public class Scripter {
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
-                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                CtMethod ctMethod = null;
+                for (CtMethod c:ctClass.getMethods()) {
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctMethod = c;
+                        break;
+                    }
+                }
                 StringBuilder newMethodBody= new StringBuilder();
                 try {
                     File newMethodBodyFile = new File(wordsInScriptFile[3]);
@@ -207,7 +208,15 @@ public class Scripter {
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
-                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                CtMethod ctMethod = null;
+                for (CtMethod c:ctClass.getMethods()) {
+                    System.out.println(c.getLongName());
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctMethod = c;
+                        break;
+                    }
+                }
                 StringBuilder newMethodBody= new StringBuilder();
                 try {
                     File newMethodBodyFile = new File(wordsInScriptFile[3]);
@@ -231,7 +240,14 @@ public class Scripter {
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
-                CtMethod ctMethod = ctClass.getDeclaredMethod(wordsInScriptFile[2]);
+                CtMethod ctMethod = null;
+                for (CtMethod c:ctClass.getMethods()) {
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctMethod = c;
+                        break;
+                    }
+                }
                 StringBuilder newMethodBody= new StringBuilder();
                 try {
                     File newMethodBodyFile = new File(wordsInScriptFile[3]);

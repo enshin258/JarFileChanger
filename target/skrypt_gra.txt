@@ -1,4 +1,4 @@
 add-method com.diamond.iain.javagame.entities.Player public void cheatShot() {}
-add-after-method com.diamond.iain.javagame.entities.Player cheatShot skrypt_gra_metoda1.txt
+add-after-method com.diamond.iain.javagame.entities.Player com.diamond.iain.javagame.entities.Player.cheatShot() skrypt_gra_metoda1.txt
 add-field com.diamond.iain.javagame.gfx.KeyManager public String cheatCode = "";
-set-method-body com.diamond.iain.javagame.gfx.KeyManager keyPressed skrypt_gra_metoda2.txt
+set-method-body com.diamond.iain.javagame.gfx.KeyManager com.diamond.iain.javagame.gfx.KeyManager.keyPressed(java.awt.event.KeyEvent) skrypt_gra_metoda2.txt

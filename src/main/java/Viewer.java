@@ -108,9 +108,6 @@ public class Viewer {
                 while ((jarEntry =jarInputStream.getNextJarEntry()) != null) {
                     if (!jarEntry.isDirectory() && jarEntry.getName().endsWith(".class")) {
                         String className = jarEntry.getName();
-//                        int lastSlash =  className.lastIndexOf("/");
-//                        String justClassName = className.substring(lastSlash+1);
-//                        System.out.println(justClassName);
                         System.out.println(className);
                     }
                 }
@@ -130,7 +127,7 @@ public class Viewer {
         CtMethod[] methods = ctClass.getMethods();
         System.out.println("***Methods***");
         for(CtMethod method: methods){
-            System.out.println(method.getName());
+            System.out.println(method.getLongName());
         }
     }
     public static void listFieldsInsideClass() throws NotFoundException {
@@ -149,7 +146,7 @@ public class Viewer {
 
         System.out.println("***Constructors***");
         for(CtConstructor constructor: constructors){
-            System.out.println(constructor.getName());
+            System.out.println(constructor.getLongName());
         }
     }
 

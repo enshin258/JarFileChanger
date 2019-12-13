@@ -1,9 +1,9 @@
-add-class com.diamond.iain.javagame.entities.MOJAKLASA
 add-package com.diamond.iain.javagame.entities.MOJPAKIET
+add-class com.diamond.iain.javagame.entities.MOJAKLASA
 add-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
-add-method com.diamond.iain.javagame.entities.Aliens public String MOJAMETODA(String str) { return str+"test"; }
-set-method-body com.diamond.iain.javagame.entities.Destroyer reset new_body.txt
-add-before-method com.diamond.iain.javagame.entities.Invader render add_before.txt
-add-after-method com.diamond.iain.javagame.entities.Invader render add_after.txt
+add-method com.diamond.iain.javagame.entities.Aliens public String MOJAMETODA (java.lang.String str) { return str+"test"; }
+set-method-body com.diamond.iain.javagame.entities.Destroyer com.diamond.iain.javagame.entities.Destroyer.reset() new_body.txt
+add-before-method com.diamond.iain.javagame.entities.Destroyer com.diamond.iain.javagame.entities.Destroyer.reset() add_before.txt
+add-after-method com.diamond.iain.javagame.entities.Invader com.diamond.iain.javagame.entities.Invader.render(java.awt.Graphics) add_after.txt
 add-field com.diamond.iain.javagame.entities.Invader public int MOJEPOLE = 3;
 add-ctor com.diamond.iain.javagame.entities.Invader Invader(int x) {this.x=x;}

@@ -5,7 +5,6 @@ public class Main {
         // --i plik.jar --list-classes
         // --i plik.jar --list-ctors nazwa_klasy
         // --i plik.jar --script nazwa_skryptu --o jar wyjsciowy
-        //TODO pomija plik .gitignore
         //TODO poprawic ustawianie konstruktora
         //TODO add-afteer-method tworzy Object var3=null???
         //TODO dodanie konstruktora tworzyu dodatkowo dziwny konstruktor
