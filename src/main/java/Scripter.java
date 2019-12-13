@@ -159,7 +159,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = null;
-                for (CtMethod c:ctClass.getMethods()) {
+                for (CtMethod c:ctClass.getDeclaredMethods()) {
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
                         ctMethod = c;
@@ -178,7 +178,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = null;
-                for (CtMethod c:ctClass.getMethods()) {
+                for (CtMethod c:ctClass.getDeclaredMethods()) {
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
                         ctMethod = c;
@@ -209,7 +209,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = null;
-                for (CtMethod c:ctClass.getMethods()) {
+                for (CtMethod c:ctClass.getDeclaredMethods()) {
                     System.out.println(c.getLongName());
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
@@ -241,7 +241,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtMethod ctMethod = null;
-                for (CtMethod c:ctClass.getMethods()) {
+                for (CtMethod c:ctClass.getDeclaredMethods()) {
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
                         ctMethod = c;
@@ -316,7 +316,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtConstructor ctConstructor = null;
-                for (CtConstructor c:ctClass.getConstructors()) {
+                for (CtConstructor c:ctClass.getDeclaredConstructors()) {
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
                         ctConstructor= c;
@@ -335,7 +335,7 @@ public class Scripter {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
                 CtConstructor ctConstructor =null;
-                for (CtConstructor c:ctClass.getConstructors()) {
+                for (CtConstructor c:ctClass.getDeclaredConstructors()) {
                     System.out.println(c.getLongName());
                     if(c.getLongName().equals(wordsInScriptFile[2]))
                     {
