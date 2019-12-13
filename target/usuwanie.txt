@@ -2,4 +2,6 @@ remove-package com.diamond.iain.javagame.entities.MOJPAKIET
 remove-class com.diamond.iain.javagame.entities.MOJAKLASA
 remove-interface com.diamond.iain.javagame.entities.MOJINTERFEJS
 remove-method com.diamond.iain.javagame.entities.Aliens com.diamond.iain.javagame.entities.Aliens.MOJAMETODA(java.lang.String)
-remove-field com.diamond.iain.javagame.entities.Meteor score
+remove_method com.diamond.iain.javagame.entities.Destroyer com.diamond.iain.javagame.entities.Destroyer.reset()
+remove-field com.diamond.iain.javagame.entities.Invader MOJEPOLE
+remove-ctor com.diamond.iain.javagame.entities.Invader com.diamond.iain.javagame.entities.Invader(int)

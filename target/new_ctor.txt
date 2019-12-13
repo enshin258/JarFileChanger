@@ -1,6 +1,3 @@
 {
-      this.manager = com.diamond.iain.javagame.gfx.SpriteManager.manager;
-      this.destroyer = new com.diamond.iain.javagame.entities.Destroyer(com.diamond.iain.javagame.gfx.SpriteManager.manager);
-      this.mothership = com.diamond.iain.javagame.entities.new Mothership(com.diamond.iain.javagame.gfx.SpriteManager.manager);
       System.out.print("TU ZMIENIONO KONSTRUKTOR");
 }

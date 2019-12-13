@@ -5,19 +5,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Scripter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Scripter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Viewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Viewer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Scripter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Scripter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Viewer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Viewer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Aliens.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Aliens.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Destroyer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Destroyer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Invader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/com/diamond/iain/javagame/entities/Invader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/dodawanie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/dodawanie.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/skrypt_gra.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/skrypt_gra.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/new_ctor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/new_ctor.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/skrypt_gra_metoda3.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/usuwanie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/usuwanie.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/wynik.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/wynik.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/wynik2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/wynik2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/zmodyfikowana_gra.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/zmodyfikowana_gra.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/wynikowa_gra.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/zmodyfikowana_gra.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,7 @@
       <recent name="C:\Users\kubaw\Desktop\WAT\JFK\JarFilesChanger\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.zmodyfikowana_gra.jar">
+  <component name="RunManager" selected="Application.Usuwanie">
     <configuration name="Dodawanie" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="JarFilesChanger" />
@@ -181,7 +180,7 @@
       <workItem from="1575909338037" duration="26000" />
       <workItem from="1576095561604" duration="3380000" />
       <workItem from="1576148375091" duration="6592000" />
-      <workItem from="1576236382758" duration="5403000" />
+      <workItem from="1576236382758" duration="9114000" />
     </task>
     <task id="LOCAL-00001" summary="little fixes v1">
       <created>1575818266248</created>
@@ -218,11 +217,29 @@
       <option name="project" value="LOCAL" />
       <updated>1576154680390</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="little fixes">
+      <created>1576242075900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1576242075900</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="little fixes v1" />
@@ -230,7 +247,8 @@
     <MESSAGE value="fixed error with editing same class more than one time" />
     <MESSAGE value="little improvement" />
     <MESSAGE value="added cheat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cheat code" />
+    <MESSAGE value="little fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="little fixes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-7" y="0" width="974" height="1040" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576097934145">
@@ -247,23 +265,23 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="209" y="303" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1575894310736" />
-    <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575731795224">
+    <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576247296618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1575566126429" />
-    <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1575731795224" />
-    <state x="563" y="114" key="CommitChangelistDialog2" timestamp="1576154679519">
+    <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576247296618" />
+    <state x="563" y="114" key="CommitChangelistDialog2" timestamp="1576242075062">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="563" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576154679519" />
+    <state x="563" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576242075062" />
     <state width="506" height="453" key="DebuggerActiveHint" timestamp="1575572058937">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="506" height="453" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1575572058937" />
-    <state x="94" y="289" width="1736" height="856" key="DiffContextDialog" timestamp="1576240506281">
+    <state x="94" y="140" width="1736" height="1005" key="DiffContextDialog" timestamp="1576247702635">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="94" y="289" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576240506281" />
+    <state x="94" y="140" width="1736" height="1005" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576247702635" />
     <state x="503" y="174" key="EnvironmentVariablesDialog" timestamp="1575492600498">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -272,26 +290,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="260" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576150216514" />
-    <state width="1877" height="247" key="GridCell.Tab.0.bottom" timestamp="1576241890474">
+    <state width="1877" height="247" key="GridCell.Tab.0.bottom" timestamp="1576247548652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1575573068359" />
-    <state width="1877" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576241890474" />
-    <state width="1877" height="247" key="GridCell.Tab.0.center" timestamp="1576241890474">
+    <state width="1877" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576247548652" />
+    <state width="1877" height="247" key="GridCell.Tab.0.center" timestamp="1576247548652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1575573068359" />
-    <state width="1877" height="247" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576241890474" />
-    <state width="1877" height="247" key="GridCell.Tab.0.left" timestamp="1576241890474">
+    <state width="1877" height="247" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576247548652" />
+    <state width="1877" height="247" key="GridCell.Tab.0.left" timestamp="1576247548652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1575573068359" />
-    <state width="1877" height="247" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576241890474" />
-    <state width="1877" height="247" key="GridCell.Tab.0.right" timestamp="1576241890474">
+    <state width="1877" height="247" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576247548652" />
+    <state width="1877" height="247" key="GridCell.Tab.0.right" timestamp="1576247548652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575573068359" />
-    <state width="1877" height="247" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576241890474" />
+    <state width="1877" height="247" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576247548652" />
     <state width="1877" height="343" key="GridCell.Tab.1.bottom" timestamp="1576240170746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -316,10 +334,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575455531663" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576154682585">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576242078405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576154682585" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576242078405" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1575810064112">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

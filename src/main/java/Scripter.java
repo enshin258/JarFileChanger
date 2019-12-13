@@ -89,7 +89,7 @@ public class Scripter {
             System.out.println("Script file not found");
         }
     }
-    public static void executeCommand(String[] wordsInScriptFile) throws IOException, CannotCompileException, NotFoundException {
+    public static void executeCommand(String[] wordsInScriptFile) throws IOException, CannotCompileException, NotFoundException{
         switch (wordsInScriptFile[0])
         {
             case "add-package":
@@ -315,7 +315,14 @@ public class Scripter {
             {
                 CtClass ctClass = classPool.get(wordsInScriptFile[1]);
                 ctClass.defrost();
-                CtConstructor ctConstructor = ctClass.getConstructor(wordsInScriptFile[2]);
+                CtConstructor ctConstructor = null;
+                for (CtConstructor c:ctClass.getConstructors()) {
+                    if(c.getLongName().equals(wordsInScriptFile[2]))
+                    {
+                        ctConstructor= c;
+                        break;
+                    }
+                }
                 ctClass.removeConstructor(ctConstructor);
                 ctClass.writeFile();
                 String tempJarEntryClassName = ctClass.getName().replaceAll("\\.","/");
