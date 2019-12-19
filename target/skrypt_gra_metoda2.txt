@@ -7,8 +7,7 @@ if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
 this.player.setRight(true);
 }
 if ($1.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
-this.cheatCode+=" ";
-if(this.cheatCode.contains("kocham jfk"))
+if(this.cheatCode.contains("kochamjfk"))
 {
 this.player.cheatShot();
 }

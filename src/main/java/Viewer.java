@@ -124,7 +124,7 @@ public class Viewer {
 
         classPool.insertClassPath(arguments[1]);
         CtClass ctClass = classPool.get(actualClassname);
-        CtMethod[] methods = ctClass.getMethods();
+        CtMethod[] methods = ctClass.getDeclaredMethods();
         System.out.println("***Methods***");
         for(CtMethod method: methods){
             System.out.println(method.getLongName());
@@ -133,7 +133,7 @@ public class Viewer {
     public static void listFieldsInsideClass() throws NotFoundException {
         classPool.insertClassPath(arguments[1]);
         CtClass ctClass = classPool.get(actualClassname);
-        CtField[] fields = ctClass.getFields();
+        CtField[] fields = ctClass.getDeclaredFields();
         System.out.println("***Fields***");
         for(CtField field: fields){
             System.out.println(field.getName());
@@ -142,7 +142,7 @@ public class Viewer {
     public static void listConstructorsInsideClass() throws NotFoundException {
         classPool.insertClassPath(arguments[1]);
         CtClass ctClass = classPool.get(actualClassname);
-        CtConstructor[] constructors = ctClass.getConstructors();
+        CtConstructor[] constructors = ctClass.getDeclaredConstructors();
 
         System.out.println("***Constructors***");
         for(CtConstructor constructor: constructors){

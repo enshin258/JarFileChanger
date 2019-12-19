@@ -2,12 +2,9 @@
 public class Main {
     public static void main(String[] args) throws NoClassFileException {
 
-        // --i plik.jar --list-classes
-        // --i plik.jar --list-ctors nazwa_klasy
-        // --i plik.jar --script nazwa_skryptu --o jar wyjsciowy
-        //TODO add-afteer-method tworzy Object var3=null???
-        //TODO dodanie konstruktora tworzyu dodatkowo dziwny konstruktor
-        //TODO zmienic zeby usuwalo tylko dodane klasy itd.
+
+        //listowanie np. metod klasy odbywa sie po wpisanu pelnej nazwy klasy bez dopisku .class
+        //np. com.diamond.iain.javagame.entities.Aliens
         try {
             switch (args.length)
             {
